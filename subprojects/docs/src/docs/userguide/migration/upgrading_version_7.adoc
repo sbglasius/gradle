@@ -111,6 +111,13 @@ For example, a dependency substitution rule `substitute(project(':a')).with(proj
 With chaining you can, for example, add a reason for a substitution like this:
 `substitute(project(':a')).using(project(':b')).because("a reason")`.
 
+[[java_lamdba_action]]
+=== Using Java lambdas as task actions
+
+When using a Java lambda to implement a task action, Gradle cannot track the implementation and the task will never be up-to-date of from the build cache.
+Since it is easy to add such a task action, using task actions implemented by Java lambdas is now deprecated.
+See <<validation_problems.adoc#implementation_unknown,Validation problems>> for more details how to fix the issue.
+
 === Potential breaking changes
 
 ==== The `org.gradle.util` package is now a public API
