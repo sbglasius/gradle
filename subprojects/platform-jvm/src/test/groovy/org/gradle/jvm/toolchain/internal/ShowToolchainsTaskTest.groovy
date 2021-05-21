@@ -54,11 +54,11 @@ class ShowToolchainsTaskTest extends AbstractProjectBuilderSpec {
         given:
         task.installationRegistry.listInstallations() >>
             [jdk14, jdk15, jdk9, jdk8, jdk82].collect {new InstallationLocation(it, "TestSource")}
-        detector.getMetadata(jdk14) >> metadata("14", "+2")
-        detector.getMetadata(jdk15) >> metadata("15-ea", "+2")
-        detector.getMetadata(jdk9) >> metadata("9", "+2")
-        detector.getMetadata(jdk8) >> metadata("1.8.0_202", "-b01")
-        detector.getMetadata(jdk82) >> metadata("1.8.0_404", "-b01")
+        detector.getMetadata(jdk14) >> metadata("14+2")
+        detector.getMetadata(jdk15) >> metadata("15-ea+2")
+        detector.getMetadata(jdk9) >> metadata("9+2")
+        detector.getMetadata(jdk8) >> metadata("1.8.0_202-b01")
+        detector.getMetadata(jdk82) >> metadata("1.8.0_404-b01")
 
         when:
         task.showToolchains()
@@ -115,7 +115,7 @@ class ShowToolchainsTaskTest extends AbstractProjectBuilderSpec {
         given:
         task.installationRegistry.listInstallations() >>
             [jdk14, invalid, noSuchDirectory].collect {new InstallationLocation(it, "TestSource")}
-        detector.getMetadata(jdk14) >> metadata("14", "+1")
+        detector.getMetadata(jdk14) >> metadata("14+1")
         detector.getMetadata(invalid) >> newInvalidMetadata()
         detector.getMetadata(noSuchDirectory) >> newInvalidMetadata()
 
@@ -188,10 +188,9 @@ class ShowToolchainsTaskTest extends AbstractProjectBuilderSpec {
 """
     }
 
-    JvmInstallationMetadata metadata(String implVersion, String build) {
-        def runtimeVersion = implVersion + build
+    JvmInstallationMetadata metadata(String runtimeVersion) {
         def jvmVersion = runtimeVersion + "-vm"
-        return JvmInstallationMetadata.from(new File("path"), implVersion, runtimeVersion, jvmVersion, "adoptopenjdk", "")
+        return JvmInstallationMetadata.from(new File("path"), runtimeVersion, jvmVersion, "adoptopenjdk", "")
     }
 
     JvmInstallationMetadata newInvalidMetadata() {

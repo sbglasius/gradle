@@ -177,7 +177,7 @@ public abstract class AvailableJavaHomes {
     public static Jvm getDifferentJdkWithValidJre() {
         return AvailableJavaHomes.getAvailableJdk(jvm -> !jvm.getJavaHome().equals(Jvm.current().getJavaHome().toPath())
             && isSupportedVersion(jvm)
-            && Jvm.discovered(jvm.getJavaHome().toFile(), null, jvm.getLanguageVersion()).getJre() != null);
+            && Jvm.discovered(jvm.getJavaHome().toFile(), jvm.getLanguageVersion()).getJre() != null);
     }
 
     /**
@@ -200,7 +200,7 @@ public abstract class AvailableJavaHomes {
     }
 
     private static Jvm jvmFromMetadata(JvmInstallationMetadata metadata) {
-        return Jvm.discovered(metadata.getJavaHome().toFile(), metadata.getImplementationVersion(), metadata.getLanguageVersion());
+        return Jvm.discovered(metadata.getJavaHome().toFile(), metadata.getLanguageVersion());
     }
 
     private static List<JvmInstallationMetadata> getJvms() {
@@ -223,7 +223,7 @@ public abstract class AvailableJavaHomes {
 
         System.out.println("Found the following JVMs:");
         for (JvmInstallationMetadata jvm : jvms) {
-            String name = jvm.getDisplayName() + " " + jvm.getImplementationVersion() + " ";
+            String name = jvm.getDisplayName() + " " + jvm.getRuntimeVersion() + " ";
             System.out.println("    " + name + " - " + jvm.getJavaHome());
         }
         return jvms;

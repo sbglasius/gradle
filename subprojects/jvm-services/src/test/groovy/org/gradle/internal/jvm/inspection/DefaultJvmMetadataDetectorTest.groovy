@@ -162,7 +162,6 @@ class DefaultJvmMetadataDetectorTest extends Specification {
 
         assertIsUnsupported({ metadata.languageVersion })
         assertIsUnsupported({ metadata.vendor })
-        assertIsUnsupported({ metadata.implementationVersion })
         assertIsUnsupported({ metadata.runtimeVersion })
         assertIsUnsupported({ metadata.jvmVersion })
 

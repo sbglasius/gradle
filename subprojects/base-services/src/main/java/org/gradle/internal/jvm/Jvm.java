@@ -123,8 +123,8 @@ public class Jvm implements JavaInfo {
     /**
      * Creates JVM instance for given values. This method is intended to be used for discovered java homes.
      */
-    public static Jvm discovered(File javaHome, String implementationJavaVersion, JavaVersion javaVersion) {
-        return create(javaHome, implementationJavaVersion, javaVersion);
+    public static Jvm discovered(File javaHome, JavaVersion javaVersion) {
+        return create(javaHome, null, javaVersion);
     }
 
     @Override

@@ -37,7 +37,6 @@ class ToolchainReportRendererTest extends Specification {
         given:
         def metadata = JvmInstallationMetadata.from(
             new File("path"),
-            "1.8.0",
             "1.8.0-b01",
             "25.292-b01",
             "vendorName",
@@ -60,7 +59,6 @@ class ToolchainReportRendererTest extends Specification {
         File javaHome = temporaryFolder.newFolder("javahome")
         def metadata = JvmInstallationMetadata.from(
             javaHome,
-            "1.8.0",
             "1.8.0-b01",
             "25.292-b01",
             "adoptopenjdk",
